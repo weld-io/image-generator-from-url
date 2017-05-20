@@ -1,0 +1,25 @@
+{
+  "name": "image-generator-from-url",
+  "version": "0.1.0",
+  "description": "REST API service",
+  "author": "Weld (www.weld.io)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/weld-io/image-generator-from-url.git"
+  },
+  "main": "app/app.js",
+  "scripts": {
+    "dev": "nodemon app/app.js",
+    "start": "node app/app.js",
+    "test": "make test"
+  },
+  "dependencies": {
+    "async": "^2.4.0",
+    "gm": "^1.23.0",
+    "lodash": "^4.17.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
