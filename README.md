@@ -22,28 +22,36 @@ Made by the team at **Weld** ([www.weld.io](https://www.weld.io?utm_source=githu
 ## How to use it
 
 1. Browser: Open your favorite browser and make an image like this:
-`http://localhost:3030/background:pink/text:A+beautiful+golden+sun+is+setting`
+`http://localhost:3030/background:*6ec8dc/stroke:white/line:0,0,50,250/drawLine:0,0,250,250`
 
 2. Embed a an image directly into an HTML page:
 
-	<img src="http://localhost:3030/background:pink/text:A+beautiful+golden+sun+is+setting">
+	<img src="http://localhost:3030/background:*6ec8dc/stroke:white/line:0,0,50,250/drawLine:0,0,250,250">
 
 3. Command line:
 
-	npm start background:pink/text:A+beautiful+golden+sun+is+setting
+	npm start background:*6ec8dc/stroke:white/line:0,0,50,250/drawLine:0,0,250,250
 
 
 ### Parameters
 
-* Image format: `format:png` (default: 'jpg')
-* Image width: `width:500` (default: 400)
-* Image height: `height:200` (default: 400)
+* Image format: `format:jpg` (default: 'png')
+* Image size: `size:500,500` (default: 500,500)
+* Image width: `width:500` (default: 500)
+* Image height: `height:200` (default: 500)
 * Background: `background:#DDAADD` (default: white)
-* Draw a line: `rectangle:10px,10px,50%,50%,#DDAADD` (x1, y1, x2, y2, color)
-* Draw a rectangle: `rectangle:10px,10px,50%,50%,rgba(0,0,0,0.5)` (x, y, width, height, fillColor, border)
-* Draw an ellipse: `ellipse:10px,10px,50%,50%,hlsa(0,0,0,0.5),2px,#DDAADD` (x, y, width, height, fillColor, borderSize, borderColor)
-* Draw text: `text:A+beautiful+golden+sun\,+is+setting,10px,10px` (text, x, y, font size, font family, alignment)
-* Draw an image: `image:10px,10px,50%,50%,http://server.com/image.png` (x, y, width, height, URL)
+* Line stroke: `stroke:#DDAADD`
+* Draw a line: `rectangle:10,10,50%,50%`
+* Draw a rectangle: `rectangle:10,10,50%,50%`
+* Draw an ellipse: `ellipse:10,10,50%,50%`
+* Draw text: `10,10,text:A+beautiful+golden+sun\,+is+setting`
+
+Later:
+
+* Draw an image: `image:10,10,50%,50%,http://server.com/image.png`
+
+Draw commands: `arc`, `bezier`, `circle`, `ellipse`, `line`, `point`, `polygon`, `polyline`, `rectangle`, `text`.
+See [gm NPM package](https://github.com/aheckmann/gm#methods) for full list of drawing commands.
 
 
 ### Deploying on Heroku

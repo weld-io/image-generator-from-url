@@ -53,7 +53,6 @@ var parseUrlParameters = function (urlObj) {
 // Take a request object and work on it
 var processHTTPRequest = function (req, res, callback) {
 	var params = parseUrlParameters(req.url);
-	console.log('params', params);
 
 	if (params === null) {
 		// No URL
