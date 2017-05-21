@@ -40,7 +40,8 @@ var onIncomingHTTPRequest = function (req, res) {
 
 var parseUrlParameters = function (urlObj) {
 	var drawingInstructions = urlObj.slice(1);
-	if (drawingInstructions)
+	if (drawingInstructions === 'favicon.ico')
+		return null;
 	var imageOptions = _.merge({}, config.defaultOptions);
 	_.merge(imageOptions, url.parse(urlObj, true).query);
 	return {
@@ -54,19 +55,19 @@ var processHTTPRequest = function (req, res, callback) {
 	var params = parseUrlParameters(req.url);
 	console.log('params', params);
 
-	if (false) {
+	if (params === null) {
 		// No URL
-		if (callback) callback('Not valid URL');
+		sendWebResponse(res, undefined, callback, 'Not valid URL', undefined);
 	}
 	else {
 		// requestsBeingProcessed++;
 		// console.log('Working on: %s (total %d)', params.drawingInstructions, requestsBeingProcessed);
-		drawing.drawImageObject(params.drawingInstructions, params.imageOptions, saveImageBufferToWebResponse.bind(this, res, params.imageOptions, callback));
+		drawing.drawImageObject(params.drawingInstructions, params.imageOptions, sendWebResponse.bind(this, res, params.imageOptions, callback));
 	}
 
 };
 
-var saveImageBufferToWebResponse = function (res, imageOptions, callback, err, imageBuffer) {
+var sendWebResponse = function (res, imageOptions, callback, err, imageBuffer) {
 	// requestsBeingProcessed--;
 	// console.log('Done with: %s (total %d)', 'X', requestsBeingProcessed);
 	if (!err) {

@@ -15,6 +15,7 @@ module.exports = {
 		width: 500,
 		height: 500,
 		imageFormat: 'png',
+		backgroundColor: 'white',
 	},
 
 };
