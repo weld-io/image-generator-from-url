@@ -1,7 +1,7 @@
 {
   "name": "image-generator-from-url",
   "version": "0.1.0",
-  "description": "REST API service",
+  "description": "Service that generates an image, based on input given in an URL.",
   "author": "Weld (www.weld.io)",
   "license": "MIT",
   "repository": {

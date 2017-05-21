@@ -11,6 +11,7 @@ Made by the team at **Weld** ([www.weld.io](https://www.weld.io?utm_source=githu
 
 ![Image Generator from URL](example.png)
 
+
 ## How to run it
 
 1. Install GraphicsMagick.
@@ -31,6 +32,7 @@ Made by the team at **Weld** ([www.weld.io](https://www.weld.io?utm_source=githu
 
 	npm start background:pink/text:A+beautiful+golden+sun+is+setting
 
+
 ### Parameters
 
 * Image format: `format:png` (default: 'jpg')
@@ -43,10 +45,11 @@ Made by the team at **Weld** ([www.weld.io](https://www.weld.io?utm_source=githu
 * Draw text: `text:A+beautiful+golden+sun\,+is+setting,10px,10px` (text, x, y, font size, font family, alignment)
 * Draw an image: `image:10px,10px,50%,50%,http://server.com/image.png` (x, y, width, height, URL)
 
+
 ### Deploying on Heroku
 
 	# Set up and configure app
 	heroku create MYAPPNAME
 	heroku config:set NODE_ENV=production
 	git push heroku master
-	heroku buildpacks:add --index 1 https://github.com/mcollina/heroku-buildpack-graphicsmagick.git
+	heroku buildpacks:add https://github.com/xerpa/heroku-buildpack-graphicsmagick.git
