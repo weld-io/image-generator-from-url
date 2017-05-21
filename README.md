@@ -42,3 +42,11 @@ Made by the team at **Weld** ([www.weld.io](https://www.weld.io?utm_source=githu
 * Draw an ellipse: `ellipse:10px,10px,50%,50%,hlsa(0,0,0,0.5),2px,#DDAADD` (x, y, width, height, fillColor, borderSize, borderColor)
 * Draw text: `text:A+beautiful+golden+sun\,+is+setting,10px,10px` (text, x, y, font size, font family, alignment)
 * Draw an image: `image:10px,10px,50%,50%,http://server.com/image.png` (x, y, width, height, URL)
+
+### Deploying on Heroku
+
+	# Set up and configure app
+	heroku create MYAPPNAME
+	heroku config:set NODE_ENV=production
+	git push heroku master
+	heroku buildpacks:add --index 1 https://github.com/mcollina/heroku-buildpack-graphicsmagick.git
