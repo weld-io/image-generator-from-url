@@ -25,46 +25,12 @@ var requestsBeingProcessed = 0;
 var requestQueue = [];
 var workingOnQueue = false;
 
-var formatImage = function(imageData, imageOptions, callback){
-	var imageBuffer = new Buffer(imageData, 'base64');
-	// GraphicsMagick options: see http://aheckmann.github.io/gm/docs.html
-	var imageObj = gm(imageBuffer, 'image.' + imageOptions.imageFormat);
-	if (imageOptions.trim) {
-		// Trim: for symbols etc
-		imageObj.trim();
-		imageObj.gravity('Center');
-		imageObj.resize(imageOptions.imageWidth, imageOptions.imageHeight, '>');
-	}
-	else {
-		// No trim: for screens
-		imageObj.gravity(imageOptions.gravity);
-		imageObj.resize(imageOptions.imageWidth, imageOptions.imageHeight, '^');
-		imageObj.crop(imageOptions.imageWidth, imageOptions.imageHeight);
-	}
+// gm: see https://github.com/aheckmann/gm
+var drawImageObject = function (imageData, imageOptions, callback) {
+	var imageObj = gm(400, 400, "#ccaabb");
+	imageObj.stroke("#000").drawText(10, 50, "from scratch");
 	imageObj.toBuffer(imageOptions.imageFormat.toUpperCase(), callback);
 }
-
-// Take URL, deliver image buffer
-var renderUrlToImage = function (url, imageOptions, callback) {
-	var lastTime = Date.now();
-
-	var logTimestamp = function (msg) {
-		if (VERBOSE_LOGGING)
-			console.log('%s: %s (%d)', msg, url, (Date.now() - lastTime));
-		lastTime = Date.now();
-	};
-
-	async.waterfall([
-		// Format image
-		function (imageData, cbWaterfall) {
-			logTimestamp('Format image');
-			formatImage(imageData, imageOptions, cbWaterfall);
-		},
-	],
-	function (err, results) {
-		callback(err, results);
-	});
-};
 
 // Save image to disk
 var saveImageBufferToDisk = function (fileName, imageBuffer, callback) {
@@ -72,38 +38,50 @@ var saveImageBufferToDisk = function (fileName, imageBuffer, callback) {
 	fs.writeFile(fileName, imageBuffer, 'binary', callback);
 };
 
+var saveImageBufferToWebResponse = function (res, imageOptions, callback, err, imageBuffer) {
+	requestsBeingProcessed--;
+	console.log('Done with: %s (total %d)', 'X', requestsBeingProcessed);
+	if (!err) {
+		res.writeHead(200, {
+			'Content-Type': 'image/' + imageOptions.imageFormat,
+			'Content-Length': imageBuffer.length,
+			'Cache-Control': 'public, max-age=31536000'});
+		res.end(imageBuffer);
+	}
+	else {
+		console.log('Image render error:', err);
+		if (res.send)
+			res.send(500);
+		else
+			res.end();
+	}
+	if (callback) callback(err);
+}
+
+var parseParameters = function (urlObj) {
+	var drawingInstructions = urlObj.slice(1);
+	if (drawingInstructions)
+	var imageOptions = _.merge({}, defaultOptions);
+	_.merge(imageOptions, url.parse(urlObj, true).query);
+	return {
+		drawingInstructions: drawingInstructions,
+		imageOptions: imageOptions,
+	};
+};
+
 // Take a request object and work on it
 var processHTTPRequest = function (req, res, callback) {
-	var pageURL = req.url.slice(1);
-	var imageOptions = _.merge({}, defaultOptions);
-	_.merge(imageOptions, url.parse(req.url, true).query);
+	var params = parseParameters(req.url);
+	console.log('params', params);
 
-	if (pageURL.indexOf('http') === -1) {
+	if (false) {
 		// No URL
 		if (callback) callback('Not valid URL');
 	}
 	else {
 		requestsBeingProcessed++;
-		console.log('Working on: %s (total %d)', pageURL, requestsBeingProcessed);
-		renderUrlToImage(pageURL, imageOptions, function (err, imageBuffer) {
-			requestsBeingProcessed--;
-			console.log('Done with: %s (total %d)', pageURL, requestsBeingProcessed);
-			if (!err) {
-				res.writeHead(200, {
-					'Content-Type': 'image/' + imageOptions.imageFormat,
-					'Content-Length': imageBuffer.length,
-					'Cache-Control': 'public, max-age=31536000'});
-				res.end(imageBuffer);
-			}
-			else {
-				console.log('Image render error:', err);
-				if (res.send)
-					res.send(500);
-				else
-					res.end();
-			}
-			if (callback) callback(err);
-		});		
+		console.log('Working on: %s (total %d)', params.drawingInstructions, requestsBeingProcessed);
+		drawImageObject(params.drawingInstructions, params.imageOptions, saveImageBufferToWebResponse.bind(this, res, params.imageOptions, callback));
 	}
 
 };
@@ -135,12 +113,13 @@ var addToRequestQueue = function (req, res) {
 // Else put into queue
 var onIncomingHTTPRequest = function (req, res) {
 	console.log('Incoming request:', req.url);
-	if (requestsBeingProcessed < MAX_PARALLELL_JOBS) {
 		processHTTPRequest(req, res); // Process immediately
-	}
-	else {
-		addToRequestQueue(req, res); // Add to queue
-	}
+	// if (requestsBeingProcessed < MAX_PARALLELL_JOBS) {
+	// 	processHTTPRequest(req, res); // Process immediately
+	// }
+	// else {
+	// 	addToRequestQueue(req, res); // Add to queue
+	// }
 };
 
 var processCommandLine = function () {
