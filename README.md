@@ -25,7 +25,7 @@ Made by the team at **Weld** ([www.weld.io](https://www.weld.io?utm_source=githu
 
 	`http://localhost:3030/background:*6ec8dc/fill:white/fontSize:100/text:0,20,Weld.io,South/stroke:white,5/line:0,100%,50,250/line:50,250,100,300/line:100,300,50%,20%`
 
-2. Embed a an image directly into an HTML page:
+2. Embed an image directly into an HTML page:
 
 	`<img src="http://localhost:3030/background:*6ec8dc/fill:white/fontSize:100/text:0,20,Weld.io,South/stroke:white,5/line:0,100%,50,250/line:50,250,100,300/line:100,300,50%,20%">`
 
