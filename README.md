@@ -38,10 +38,8 @@ Made by the team at **Weld** ([www.weld.io](https://www.weld.io?utm_source=githu
 
 ### Parameters
 
-* Image format: `format:jpg` (default: 'png')
-* Image size: `size:200,200` (default: 500,500)
-* Image width: `width:200` (default: 500)
-* Image height: `height:200` (default: 500)
+* Image format: `format:jpg` (default: png)
+* Image size: `size:200,200` or `width:200`/`height:200` (default: 500,500)
 * Background: `background:*DDAADD`** (default: white)
 * Line stroke color/size: `stroke:*DDAADD,5`**
 * Fill color: `fill:*DDAADD`**
