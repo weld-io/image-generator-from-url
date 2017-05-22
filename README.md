@@ -57,9 +57,10 @@ See [gm NPM package](https://github.com/aheckmann/gm#methods) for full list of d
 
 ## *Upcoming features
 
-* Image templates that require less parameters.
+* More drawing commands, e.g. insert an external image.
+* Support for relative units e.g. `50%`.
 * Command line support.
-* More drawing commands.
+* Image templates that require less parameters.
 
 
 ## Deploying on Heroku
