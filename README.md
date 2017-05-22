@@ -37,19 +37,21 @@ Made by the team at **Weld** ([www.weld.io](https://www.weld.io?utm_source=githu
 ### Parameters
 
 * Image format: `format:jpg` (default: 'png')
-* Image size: `size:500,500` (default: 500,500)
-* Image width: `width:500` (default: 500)
+* Image size: `size:200,200` (default: 500,500)
+* Image width: `width:200` (default: 500)
 * Image height: `height:200` (default: 500)
-* Background: `background:*DDAADD` (default: white)
-* Line stroke: `stroke:*DDAADD`
-* Draw a line: `rectangle:10,10,50%,50%`
-* Draw a rectangle: `rectangle:10,10,50%,50%`
-* Draw an ellipse: `ellipse:10,10,50%,50%`
-* Draw text: `10,10,text:A+beautiful+golden+sun\,+is+setting`
+* Background: `background:*DDAADD`** (default: white)
+* Line stroke: `stroke:*DDAADD`**
+* Draw a line: `rectangle:10,10,50,50`
+* Draw a rectangle: `rectangle:10,10,50,50`
+* Draw an ellipse: `ellipse:10,10,50,50`
+* Draw text: `text:10,10,A%20beautiful%20golden%20sun%20is%20setting,Center`
+
+**Since you can’t use # in an URL, use * instead for hexadecimal colors.
 
 Later*:
 
-* Draw an image: `image:10,10,50%,50%,http://server.com/image.png`
+* Draw an image: `image:10,10,50,50,http://server.com/image.png`
 
 Draw commands: `arc`, `bezier`, `circle`, `ellipse`, `line`, `point`, `polygon`, `polyline`, `rectangle`, `text`.
 See [gm NPM package](https://github.com/aheckmann/gm#methods) for full list of drawing commands.
