@@ -33,6 +33,8 @@ Made by the team at **Weld** ([www.weld.io](https://www.weld.io?utm_source=githu
 
 	`npm start background:*6ec8dc/fill:white/fontSize:100/text:0,20,Weld.io,South/stroke:white,5/line:0,100%,50,250/line:50,250,100,300/line:100,300,50%,20% myimage.png`
 
+4. Call it from services like [IFTTT](https://ifttt.com) and [Zapier](https://zapier.com), and generate images (e.g. for social media) on the fly!
+
 
 ### Parameters
 
