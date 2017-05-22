@@ -12,7 +12,7 @@ var commandline = require('./commandline');
 // Main loop
 if (process.argv.length >= 3) {
 	// Run as command line
-	commandline.processCommandLine();
+	commandline.runFromCommandLine();
 }
 else {
 	// Else web server

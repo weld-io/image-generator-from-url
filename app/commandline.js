@@ -6,35 +6,44 @@
 
 'use strict';
 
-var processCommandLine = function () {
-	var imageOptions = _.merge({}, config.defaultOptions);
-	async.waterfall([
+var _ = require('lodash');
+var async = require('async');
+var fs = require('fs');
+
+var config = require('./config');
+var drawing = require('./drawing');
+
+var params;
+
+var parseCommandLineArguments = function (callback) {
+	// Default parameters
+	params = { imageOptions: {} };
+	_.merge(params.imageOptions, config.defaultOptions);
+	params.fileName = 'image.' + params.imageOptions.imageFormat;
+	// fileName
+	if (process.argv.length > 3) {
+		params.fileName = process.argv[3];
+	}
+	// drawingInstructions
+	if (process.argv.length > 2) {
+		params.drawingInstructions = process.argv[2];
+	}
+	callback(null, params);
+};
+
+var runFromCommandLine = function () {
+	async.waterfall(
+		[
 			// Process arguments
-			function (cbWaterfall) {
-				for (var i = 2; i < process.argv.length; i++) {
-					var arg = process.argv[i];
-					if (arg.indexOf('http') !== -1) {
-						imageOptions.url = arg;
-					}
-					else if (arg.indexOf('=') !== -1) {
-						var param = arg.split('=');
-						imageOptions[param[0]] = param[1];
-					}
-					else if (arg.indexOf('.') !== -1) {
-						imageOptions.fileName = arg;
-					}
-				};
-				imageOptions.fileName = imageOptions.fileName || 'screenshot.' + imageOptions.imageFormat;
-				cbWaterfall(null, imageOptions);
-			},
+			parseCommandLineArguments,
 			// Render page
-			function (imageOptions, cbWaterfall) {
-				console.log('Render URL to image', imageOptions);
-				renderUrlToImage(imageOptions.url, imageOptions, cbWaterfall);
+			function (params, cbWaterfall) {
+				console.log('Render URL to image', params);
+				drawing.drawImageObject(params.drawingInstructions, params.imageOptions, cbWaterfall);
 			},
 			// Save to disk
 			function (imageBuffer, cbWaterfall) {
-				saveImageBufferToDisk(imageOptions.fileName, imageBuffer, cbWaterfall);
+				saveImageBufferToDisk(params.fileName, imageBuffer, cbWaterfall);
 			},
 		]
 	);
@@ -48,5 +57,7 @@ var saveImageBufferToDisk = function (fileName, imageBuffer, callback) {
 
 // Public API
 module.exports = {
+
+	runFromCommandLine: runFromCommandLine,
 
 };

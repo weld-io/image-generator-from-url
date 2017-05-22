@@ -29,9 +29,9 @@ Made by the team at **Weld** ([www.weld.io](https://www.weld.io?utm_source=githu
 
 	`<img src="http://localhost:3030/background:*6ec8dc/fill:white/fontSize:100/text:30,100,Weld.io/stroke:white,5/line:0,500,50,250/line:50,250,100,300/line:100,300,200,200">`
 
-3. Command line (not yet implemented*):
+3. Command line:
 
-	`npm start background:*6ec8dc/fill:white/fontSize:100/text:30,100,Weld.io/stroke:white,5/line:0,500,50,250/line:50,250,100,300/line:100,300,200,200`
+	`npm start background:*6ec8dc/fill:white/fontSize:100/text:30,100,Weld.io/stroke:white,5/line:0,500,50,250/line:50,250,100,300/line:100,300,200,200 myimage.png`
 
 
 ### Parameters
@@ -59,8 +59,7 @@ See [gm NPM package](https://github.com/aheckmann/gm#methods) for full list of d
 
 * More drawing commands, e.g. insert an external image.
 * Support for relative units e.g. `50%`.
-* Command line support.
-* Image templates that require less parameters.
+* Image templates that require less parameters, e.g. `http://localhost:3030/template/my-template/color:red/text:Hello%20World!`.
 
 
 ## Deploying on Heroku

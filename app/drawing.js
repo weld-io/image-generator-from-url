@@ -97,6 +97,7 @@ var drawImageObject = function (drawingInstructions, imageOptions, callback) {
 			console.error(drawErr);
 		}
 	}
+	// callback: (bind-ed parameters), err, imageBuffer
 	imageObj.toBuffer(imageOptions.imageFormat.toUpperCase(), callback);
 };
 
