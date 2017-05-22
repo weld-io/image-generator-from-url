@@ -39,8 +39,8 @@ Made by the team at **Weld** ([www.weld.io](https://www.weld.io?utm_source=githu
 * Image size: `size:500,500` (default: 500,500)
 * Image width: `width:500` (default: 500)
 * Image height: `height:200` (default: 500)
-* Background: `background:#DDAADD` (default: white)
-* Line stroke: `stroke:#DDAADD`
+* Background: `background:*DDAADD` (default: white)
+* Line stroke: `stroke:*DDAADD`
 * Draw a line: `rectangle:10,10,50%,50%`
 * Draw a rectangle: `rectangle:10,10,50%,50%`
 * Draw an ellipse: `ellipse:10,10,50%,50%`

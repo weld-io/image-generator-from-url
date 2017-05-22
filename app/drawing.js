@@ -56,14 +56,15 @@ var parseDrawingInstructions = function (drawingInstructions, imageOptions) {
 					imgOptions.height = cmdObj.arguments[0];
 					break;
 				case 'background':
-					// E.g. background:*ddaadd because of # being reserved in URLs
-					imgOptions.backgroundColor = cmdObj.arguments[0].replace('*', '#');
+					imgOptions.backgroundColor = cmdObj.arguments[0];
 					break;
 			}
 		});
 	};
 
-	const drawStringArray = drawingInstructions.split('/');
+	// E.g. background:*ddaadd because of # being reserved in URLs
+	const drawingInstructionsMod = drawingInstructions.replace(/\*/g, '#');
+	const drawStringArray = drawingInstructionsMod.split('/');
 	var drawCommandArray = parseCommands(drawStringArray);
 	expandAbbreviations(drawCommandArray);
 	processImageOptions(drawCommandArray, imageOptions);
