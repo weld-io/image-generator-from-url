@@ -48,11 +48,11 @@ Made by the team at **Weld** ([www.weld.io](https://www.weld.io?utm_source=githu
 * Draw an ellipse: `ellipse:10,10%,50,50%` (x1,y1,x2,y2)
 * Draw text: `text:10,10,A%20beautiful%20golden%20sun%20is%20setting,Center`
 
-**Since you can’t use # in an URL, use * instead for hexadecimal colors.
+**Since you can’t use `#` in an URL, use `*` instead for hexadecimal colors.
 
 Later*:
 
-* Draw an image: `image:10,10,50,50,http://server.com/image.png`
+* Draw an image: `image:10,10,50,50,http:!!server.com!image.png` (note: `!` instead of `/`)
 
 Draw commands: `arc`, `bezier`, `circle`, `ellipse`, `line`, `point`, `polygon`, `polyline`, `rectangle`, `text`.
 See [gm NPM package](https://github.com/aheckmann/gm#methods) for full list of drawing commands.
@@ -60,8 +60,9 @@ See [gm NPM package](https://github.com/aheckmann/gm#methods) for full list of d
 
 ## *Upcoming features
 
+* Support for commas in text.
 * More drawing commands, e.g. insert an external image (GraphicsMagick `composite`).
-* Image templates that require less parameters, e.g. `http://localhost:3030/template/my-template/color:red/text:Hello%20World!`.
+* Image templates that require less parameters, e.g. `http://localhost:3030/template:my-template/header-color:red/header-text:Hello%20World!`.
 
 
 ## Deploying on Heroku
