@@ -41,8 +41,9 @@ Made by the team at **Weld** ([www.weld.io](https://www.weld.io?utm_source=githu
 * Image width: `width:200` (default: 500)
 * Image height: `height:200` (default: 500)
 * Background: `background:*DDAADD`** (default: white)
-* Line stroke: `stroke:*DDAADD,5`**
-* Draw a line: `rectangle:10,10%,50,50%` (x1,y1,x2,y2)
+* Line stroke color/size: `stroke:*DDAADD,5`**
+* Fill color: `fill:*DDAADD`**
+* Draw a line: `line:10,10%,50,50%` (x1,y1,x2,y2)
 * Draw a rectangle: `rectangle:10,10%,50,50%` (x1,y1,x2,y2)
 * Draw an ellipse: `ellipse:10,10%,50,50%` (x1,y1,x2,y2)
 * Draw text: `text:10,10,A%20beautiful%20golden%20sun%20is%20setting,Center`
