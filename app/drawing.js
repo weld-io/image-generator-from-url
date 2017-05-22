@@ -19,6 +19,15 @@ String.prototype.capitalize = String.prototype.capitalize || function () {
 var parseDrawingInstructions = function (drawingInstructions, imageOptions) {
 
 	// 'line:0,0,50,250' -> { command, arguments }
+	const fullStringReplacements = function (longString) {
+		// E.g. background:*ddaadd because of # being reserved in URLs
+		var newString = longString.replace(/\*/g, '#');
+		// Spaces
+		newString = newString.replace(/\%20/g, ' ');
+		return newString;
+	};
+
+	// 'line:0,0,50,250' -> { command, arguments }
 	const parseCommands = function (stringArray) {
 		return _.map(stringArray, function (cmdString) {
 			cmdString = cmdString.replace(':', ',');
@@ -62,8 +71,7 @@ var parseDrawingInstructions = function (drawingInstructions, imageOptions) {
 		});
 	};
 
-	// E.g. background:*ddaadd because of # being reserved in URLs
-	const drawingInstructionsMod = drawingInstructions.replace(/\*/g, '#');
+	const drawingInstructionsMod = fullStringReplacements(drawingInstructions);
 	const drawStringArray = drawingInstructionsMod.split('/');
 	var drawCommandArray = parseCommands(drawStringArray);
 	expandAbbreviations(drawCommandArray);
@@ -76,7 +84,9 @@ var parseDrawingInstructions = function (drawingInstructions, imageOptions) {
 var drawImageObject = function (drawingInstructions, imageOptions, callback) {
 	var drawArray = parseDrawingInstructions(drawingInstructions, imageOptions);
 	console.log('imageOptions', imageOptions);
+	// Set up the drawing canvas
 	var imageObj = gm(imageOptions.width, imageOptions.height, imageOptions.backgroundColor);
+	imageObj.fontSize(20);
 	// Do all the drawing
 	for (var i = 0; i < drawArray.length; i++) {
 		try {
