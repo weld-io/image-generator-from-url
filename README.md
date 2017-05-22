@@ -59,5 +59,6 @@ See [gm NPM package](https://github.com/aheckmann/gm#methods) for full list of d
 	# Set up and configure app
 	heroku create MYAPPNAME
 	heroku config:set NODE_ENV=production
-	git push heroku master
+	heroku stack:set cedar-14 -a MYAPPNAME
 	heroku buildpacks:add https://github.com/xerpa/heroku-buildpack-graphicsmagick.git
+	git push heroku master
