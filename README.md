@@ -1,6 +1,6 @@
 # Image Generator from URL
 
-Service that generates an image, based on input given in an URL.
+Generate an image from instructions given in an URL or the command line.
 
 Made by the team at **Weld** ([www.weld.io](https://www.weld.io?utm_source=github-image-generator-from-url)), the code-free app and web creation tool:
 
@@ -12,7 +12,7 @@ Made by the team at **Weld** ([www.weld.io](https://www.weld.io?utm_source=githu
 ![Image Generator from URL](example.png)
 
 
-## How to run it
+## How to start it
 
 1. Install GraphicsMagick.
 2. Install NPM packages: `npm install`
@@ -22,15 +22,16 @@ Made by the team at **Weld** ([www.weld.io](https://www.weld.io?utm_source=githu
 ## How to use it
 
 1. Browser: Open your favorite browser and make an image like this:
-`http://localhost:3030/background:*6ec8dc/stroke:white/line:0,0,50,250/drawLine:0,0,250,250`
+
+	`http://localhost:3030/background:*6ec8dc/fill:white/fontSize:100/text:30,100,Weld.io/stroke:white,5/line:0,500,50,250/line:50,250,100,300/line:100,300,200,200`
 
 2. Embed a an image directly into an HTML page:
 
-	<img src="http://localhost:3030/background:*6ec8dc/stroke:white/line:0,0,50,250/drawLine:0,0,250,250">
+	`<img src="http://localhost:3030/background:*6ec8dc/fill:white/fontSize:100/text:30,100,Weld.io/stroke:white,5/line:0,500,50,250/line:50,250,100,300/line:100,300,200,200">`
 
-3. Command line:
+3. Command line (not yet implemented*):
 
-	npm start background:*6ec8dc/stroke:white/line:0,0,50,250/drawLine:0,0,250,250
+	`npm start background:*6ec8dc/fill:white/fontSize:100/text:30,100,Weld.io/stroke:white,5/line:0,500,50,250/line:50,250,100,300/line:100,300,200,200`
 
 
 ### Parameters
@@ -46,7 +47,7 @@ Made by the team at **Weld** ([www.weld.io](https://www.weld.io?utm_source=githu
 * Draw an ellipse: `ellipse:10,10,50%,50%`
 * Draw text: `10,10,text:A+beautiful+golden+sun\,+is+setting`
 
-Later:
+Later*:
 
 * Draw an image: `image:10,10,50%,50%,http://server.com/image.png`
 
@@ -54,11 +55,19 @@ Draw commands: `arc`, `bezier`, `circle`, `ellipse`, `line`, `point`, `polygon`,
 See [gm NPM package](https://github.com/aheckmann/gm#methods) for full list of drawing commands.
 
 
-### Deploying on Heroku
+## *Upcoming features
+
+* Image templates that require less parameters.
+* Command line support.
+* More drawing commands.
+
+
+## Deploying on Heroku
+
+Note: currently only runs on [Heroku Cedar-14](https://github.com/Xerpa/heroku-buildpack-graphicsmagick/issues/1)
 
 	# Set up and configure app
 	heroku create MYAPPNAME
-	heroku config:set NODE_ENV=production
 	heroku stack:set cedar-14 -a MYAPPNAME
 	heroku buildpacks:add https://github.com/xerpa/heroku-buildpack-graphicsmagick.git
 	git push heroku master
