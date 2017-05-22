@@ -47,7 +47,7 @@ var parseDrawingInstructions = function (drawingInstructions, imageOptions) {
 		});
 	};
 
-	// Check size, background commands etc
+	// Update image options: size, background etc
 	const processImageOptions = function (cmdArray, imgOptions) {
 		_.forEach(cmdArray, function (cmdObj) {
 			switch (cmdObj.command) {
@@ -71,11 +71,30 @@ var parseDrawingInstructions = function (drawingInstructions, imageOptions) {
 		});
 	};
 
+	// 'line' -> 'drawLine'
+	const convertRelativeUnits = function (cmdArray, imgOptions) {
+		_.forEach(cmdArray, function (cmdObj) {
+			var isX = true;
+			cmdObj.arguments = _.map(cmdObj.arguments, function (arg) {
+				var result;
+				if (typeof(arg) === 'string' && arg[arg.length - 1] === '%') {
+					result = parseFloat(arg) * (isX ? imgOptions.width : imgOptions.height) / 100;
+				}
+				else {
+					result = arg;
+				}
+				isX = !isX;
+				return result;
+			});
+		});
+	};
+
 	const drawingInstructionsMod = fullStringReplacements(drawingInstructions);
 	const drawStringArray = drawingInstructionsMod.split('/');
 	var drawCommandArray = parseCommands(drawStringArray);
 	expandAbbreviations(drawCommandArray);
 	processImageOptions(drawCommandArray, imageOptions);
+	convertRelativeUnits(drawCommandArray, imageOptions);
 
 	return drawCommandArray;
 };

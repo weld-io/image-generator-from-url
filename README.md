@@ -21,17 +21,17 @@ Made by the team at **Weld** ([www.weld.io](https://www.weld.io?utm_source=githu
 
 ## How to use it
 
-1. Browser: Open your favorite browser and make an image like this:
+1. Browser: open your browser and make an image like this:
 
-	`http://localhost:3030/background:*6ec8dc/fill:white/fontSize:100/text:30,100,Weld.io/stroke:white,5/line:0,500,50,250/line:50,250,100,300/line:100,300,200,200`
+	`http://localhost:3030/background:*6ec8dc/fill:white/fontSize:100/text:0,20,Weld.io,South/stroke:white,5/line:0,100%,50,250/line:50,250,100,300/line:100,300,50%,20%`
 
 2. Embed a an image directly into an HTML page:
 
-	`<img src="http://localhost:3030/background:*6ec8dc/fill:white/fontSize:100/text:30,100,Weld.io/stroke:white,5/line:0,500,50,250/line:50,250,100,300/line:100,300,200,200">`
+	`<img src="http://localhost:3030/background:*6ec8dc/fill:white/fontSize:100/text:0,20,Weld.io,South/stroke:white,5/line:0,100%,50,250/line:50,250,100,300/line:100,300,50%,20%">`
 
 3. Command line:
 
-	`npm start background:*6ec8dc/fill:white/fontSize:100/text:30,100,Weld.io/stroke:white,5/line:0,500,50,250/line:50,250,100,300/line:100,300,200,200 myimage.png`
+	`npm start background:*6ec8dc/fill:white/fontSize:100/text:0,20,Weld.io,South/stroke:white,5/line:0,100%,50,250/line:50,250,100,300/line:100,300,50%,20% myimage.png`
 
 
 ### Parameters
@@ -41,10 +41,10 @@ Made by the team at **Weld** ([www.weld.io](https://www.weld.io?utm_source=githu
 * Image width: `width:200` (default: 500)
 * Image height: `height:200` (default: 500)
 * Background: `background:*DDAADD`** (default: white)
-* Line stroke: `stroke:*DDAADD`**
-* Draw a line: `rectangle:10,10,50,50`
-* Draw a rectangle: `rectangle:10,10,50,50`
-* Draw an ellipse: `ellipse:10,10,50,50`
+* Line stroke: `stroke:*DDAADD,5`**
+* Draw a line: `rectangle:10,10%,50,50%` (x1,y1,x2,y2)
+* Draw a rectangle: `rectangle:10,10%,50,50%` (x1,y1,x2,y2)
+* Draw an ellipse: `ellipse:10,10%,50,50%` (x1,y1,x2,y2)
 * Draw text: `text:10,10,A%20beautiful%20golden%20sun%20is%20setting,Center`
 
 **Since you can’t use # in an URL, use * instead for hexadecimal colors.
@@ -59,8 +59,7 @@ See [gm NPM package](https://github.com/aheckmann/gm#methods) for full list of d
 
 ## *Upcoming features
 
-* More drawing commands, e.g. insert an external image (GraphicsMagick _composite_).
-* Support for relative units e.g. `50%`.
+* More drawing commands, e.g. insert an external image (GraphicsMagick `composite`).
 * Image templates that require less parameters, e.g. `http://localhost:3030/template/my-template/color:red/text:Hello%20World!`.
 
 
