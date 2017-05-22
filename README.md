@@ -57,7 +57,7 @@ See [gm NPM package](https://github.com/aheckmann/gm#methods) for full list of d
 
 ## *Upcoming features
 
-* More drawing commands, e.g. insert an external image.
+* More drawing commands, e.g. insert an external image (GraphicsMagick _composite_).
 * Support for relative units e.g. `50%`.
 * Image templates that require less parameters, e.g. `http://localhost:3030/template/my-template/color:red/text:Hello%20World!`.
 
